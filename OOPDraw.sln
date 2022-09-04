@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32802.440
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOPDraw", "OOPDraw\OOPDraw.csproj", "{BF2C02C7-ECAA-4D21-9656-5A35DB255181}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BF2C02C7-ECAA-4D21-9656-5A35DB255181}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF2C02C7-ECAA-4D21-9656-5A35DB255181}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF2C02C7-ECAA-4D21-9656-5A35DB255181}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF2C02C7-ECAA-4D21-9656-5A35DB255181}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {04846D85-1027-4640-A3F2-27EA470EB094}
+	EndGlobalSection
+EndGlobal
