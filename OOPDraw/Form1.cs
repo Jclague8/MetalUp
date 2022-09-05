@@ -25,7 +25,7 @@ namespace OOPDraw
         bool dragging = false;
         Point startOfDrag = Point.Empty;
         Point lastMousePosition = Point.Empty;
-        List<object> shapes = new List<object>(); 
+        private List<Shape> shapes = new List<Shape>(); 
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
@@ -35,7 +35,7 @@ namespace OOPDraw
         private void Canvas_Paint(object sender, PaintEventArgs e)
         {
             Graphics gr = e.Graphics;
-            foreach (dynamic shape in shapes)
+            foreach (Shape shape in shapes)
             {
                 shape.Draw(gr);
             }
@@ -60,7 +60,7 @@ namespace OOPDraw
         {
             if (dragging)
             {
-                dynamic shape = shapes.Last();
+                Shape shape = shapes.Last();
                 shape.GrowTo(e.X, e.Y);
                 lastMousePosition = e.Location;
                 Refresh();
