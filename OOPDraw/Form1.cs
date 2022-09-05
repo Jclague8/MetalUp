@@ -19,6 +19,7 @@ namespace OOPDraw
             LineWidth.SelectedItem = "Thin";
             Colour_Box.SelectedItem = "Black";
             comboBox1.SelectedItem = "Line";
+
         }
 
         Pen currentPen = new Pen(Color.Black);

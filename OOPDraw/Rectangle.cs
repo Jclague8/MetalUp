@@ -7,13 +7,7 @@ namespace OOPDraw
 {
     class Rectangle : Shape
     {
-        public Pen Pen { get; private set; }
-        public int X1 { get; private set; }
-        public int X2 { get; private set; }
-        public int Y1 { get; private set; }
-        public int Y2 { get; private set; }
-
-        public Rectangle(Pen p, int x1, int y1, int x2, int y2)
+        public Rectangle(Pen p, int x1, int y1, int x2, int y2) // constructor to assign values to protected variables
         {
             Pen = p;
             X1 = x1;
@@ -22,11 +16,11 @@ namespace OOPDraw
             Y2 = y2;
         }
 
-        public Rectangle(Pen p, int x1, int y1) : this(p, x1, y1, x1, y1)
-        {
+        public Rectangle(Pen p, int x1, int y1) : this(p, x1, y1, x1, y1) // overload constructor
+        { 
         }
 
-        public override void Draw(Graphics g)
+        public override void Draw(Graphics g) // Finds the origin point for the rectangle allowing it to be drawn in any direction
         {
             int x = Math.Min(X1, X2);
             int y = Math.Min(Y1, Y2);
@@ -35,11 +29,7 @@ namespace OOPDraw
             g.DrawRectangle(Pen, x, y, w, h);
         }
 
-        public override void GrowTo(int x2, int y2)
-        {
-            X2 = x2;
-            Y2 = y2;
-        }
+
 
     }
 }
