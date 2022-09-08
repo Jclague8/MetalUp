@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +20,7 @@ namespace OOPDraw
             LineWidth.SelectedItem = "Thin";
             Colour_Box.SelectedItem = "Black";
             comboBox1.SelectedItem = "Line";
+            Action.SelectedItem = "Draw";
 
         }
 
@@ -26,7 +28,9 @@ namespace OOPDraw
         bool dragging = false;
         Point startOfDrag = Point.Empty;
         Point lastMousePosition = Point.Empty;
-        private List<Shape> shapes = new List<Shape>(); 
+        private List<Shape> shapes = new List<Shape>();
+        Rectangle selectionBox;
+        
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
@@ -40,12 +44,27 @@ namespace OOPDraw
             {
                 shape.Draw(gr);
             }
+            if (selectionBox != null) selectionBox.Draw(gr);
         }
 
         private void Canvas_MouseDown(object sender, MouseEventArgs e)
         {
             dragging = true;
             startOfDrag = lastMousePosition = e.Location;
+            switch (Action.Text)
+            {
+                case "Draw":
+                    AddShape(e);
+                    break;
+                case "Select":
+                    Pen p = new Pen(Color.Black, 1.0F);
+                    selectionBox = new Rectangle(p, startOfDrag.X, startOfDrag.Y);
+                    break;
+            }
+        }
+
+        private void AddShape(MouseEventArgs e)
+        {
             switch (comboBox1.Text)
             {
                 case "Line":
@@ -54,6 +73,12 @@ namespace OOPDraw
                 case "Rectangle":
                     shapes.Add(new Rectangle(currentPen, e.X, e.Y));
                     break;
+                case "Ellipse":
+                    shapes.Add(new Ellipse(currentPen, e.X, e.Y));
+                    break;
+                case "Circle":
+                    shapes.Add(new Circle(currentPen, e.X, e.Y));
+                    break;
             }
         }
 
@@ -61,8 +86,20 @@ namespace OOPDraw
         {
             if (dragging)
             {
-                Shape shape = shapes.Last();
-                shape.GrowTo(e.X, e.Y);
+                switch (Action.Text)
+                {
+                    case "Move":
+                        MoveSelectedShapes(e);
+                        break; 
+                    case "Draw":
+                        Shape shape = shapes.Last();
+                        shape.GrowTo(e.X, e.Y);
+                        break;
+                    case "Select":
+                        selectionBox.GrowTo(e.X, e.Y);
+                        SelectShapes();
+                        break;
+                }
                 lastMousePosition = e.Location;
                 Refresh();
             }
@@ -71,7 +108,9 @@ namespace OOPDraw
         private void Canvas_MouseUp(object sender, MouseEventArgs e)
         {
             dragging = false;
-            
+            lastMousePosition = Point.Empty;
+            selectionBox = null;
+            Refresh();
         }
 
         private void LineWidth_SelectedIndexChanged(object sender, EventArgs e)
@@ -126,7 +165,64 @@ namespace OOPDraw
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
 
         }
+
+        private void DeselectAll() 
+        { foreach (Shape s in shapes)
+            { 
+                s.Deselect(); 
+            }
+        }
+
+        private void SelectShapes() 
+        { 
+            DeselectAll();
+            foreach (Shape s in shapes)
+            {
+                if (selectionBox.FullySurrounds(s)) s.Select();
+            } 
+        }
+
+        private void Action_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (Action.Text)
+            {
+                case "Group":
+                    GroupSelectedShapes();
+                    break;
+            }
+        }
+
+        private void GroupSelectedShapes()
+        {
+            var members = GetSelectedShapes(); if (members.Count < 2) return; //Group has no effect
+            CompositeShape compS = new CompositeShape(members);
+            compS.Select(); 
+            shapes.Add(compS);  
+            foreach (Shape m in members) 
+            {
+                shapes.Remove(m);m.Deselect();  
+            }    
+            Refresh();
+        }
+
+        private List<Shape> GetSelectedShapes()
+        {
+            return shapes.Where(s => s.Selected).ToList();
+        }
+
+        private void MoveSelectedShapes(MouseEventArgs e) 
+        { 
+            foreach (Shape s in GetSelectedShapes())
+            {
+                s.MoveBy(e.X - lastMousePosition.X, e.Y - lastMousePosition.Y); 
+            } 
+        }
+
     }
 }

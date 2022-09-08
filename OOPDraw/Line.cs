@@ -8,7 +8,7 @@ namespace OOPDraw
     public class Line : Shape
     {
         
-        public Line(Pen p, int x1, int y1, int x2, int y2) // constructor to assign values to protected variables
+        public Line(Pen p, int x1, int y1, int x2, int y2) : base(p,x1,y1,x2,y2) // constructor to assign values to protected variables
         {
             Pen = p;
             X1 = x1;
@@ -17,7 +17,7 @@ namespace OOPDraw
             Y2 = y2;
         }
 
-        public Line(Pen p, int x1, int y1) : this(p, x1, y1, x1, y1) // overload constructor
+        public Line(Pen p, int x1, int y1) : base(p, x1, y1) // overload constructor
         { 
         }
 

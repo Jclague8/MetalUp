@@ -36,6 +36,8 @@ namespace OOPDraw
             this.Colour_Box = new System.Windows.Forms.ComboBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.Shape = new System.Windows.Forms.TextBox();
+            this.Action = new System.Windows.Forms.ComboBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.Canvas)).BeginInit();
             this.SuspendLayout();
             // 
@@ -109,7 +111,9 @@ namespace OOPDraw
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
             "Line",
-            "Rectangle"});
+            "Rectangle",
+            "Ellipse",
+            "Circle"});
             this.comboBox1.Location = new System.Drawing.Point(0, 123);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(116, 23);
@@ -126,12 +130,39 @@ namespace OOPDraw
             this.Shape.Text = "Shape ";
             this.Shape.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // Action
+            // 
+            this.Action.FormattingEnabled = true;
+            this.Action.Items.AddRange(new object[] {
+            "Draw",
+            "Move",
+            "Select",
+            "Group"});
+            this.Action.Location = new System.Drawing.Point(0, 173);
+            this.Action.Name = "Action";
+            this.Action.Size = new System.Drawing.Size(116, 23);
+            this.Action.TabIndex = 6;
+            this.Action.SelectedIndexChanged += new System.EventHandler(this.Action_SelectedIndexChanged);
+            // 
+            // textBox3
+            // 
+            this.textBox3.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.textBox3.Location = new System.Drawing.Point(0, 152);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(116, 23);
+            this.textBox3.TabIndex = 7;
+            this.textBox3.Text = "Action";
+            this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.ClientSize = new System.Drawing.Size(1461, 657);
+            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.Action);
             this.Controls.Add(this.Shape);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.Colour_Box);
@@ -156,6 +187,8 @@ namespace OOPDraw
         private System.Windows.Forms.ComboBox Colour_Box;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.TextBox Shape;
+        private System.Windows.Forms.ComboBox Action;
+        private System.Windows.Forms.TextBox textBox3;
     }
 }
 
