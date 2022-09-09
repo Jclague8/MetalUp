@@ -195,6 +195,9 @@ namespace OOPDraw
                 case "Group":
                     GroupSelectedShapes();
                     break;
+                case "Delete":
+                    DeleteSelectedShapes();
+                    break;
             }
         }
 
@@ -222,6 +225,15 @@ namespace OOPDraw
             {
                 s.MoveBy(e.X - lastMousePosition.X, e.Y - lastMousePosition.Y); 
             } 
+        }
+
+        private void DeleteSelectedShapes() 
+        { 
+            foreach (Shape s in GetSelectedShapes())
+            { 
+                shapes.Remove(s);
+            } 
+            Refresh();
         }
 
     }

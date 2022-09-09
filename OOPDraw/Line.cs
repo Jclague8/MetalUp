@@ -26,6 +26,13 @@ namespace OOPDraw
             g.DrawLine(Pen, X1, Y1, X2, Y2);
         }
 
+        public Line Clone()
+        {
+            Line returnLine = new Line(Pen, X1, X2, Y1, Y2);
+
+            return returnLine;
+        }
+
 
     }
 }

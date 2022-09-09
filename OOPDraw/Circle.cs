@@ -32,5 +32,6 @@ namespace OOPDraw
             X2 = X1 + diameter;
             Y2 = Y1 + diameter;
         }
+
     }
 }

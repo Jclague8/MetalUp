@@ -137,7 +137,8 @@ namespace OOPDraw
             "Draw",
             "Move",
             "Select",
-            "Group"});
+            "Group",
+            "Delete"});
             this.Action.Location = new System.Drawing.Point(0, 173);
             this.Action.Name = "Action";
             this.Action.Size = new System.Drawing.Size(116, 23);
